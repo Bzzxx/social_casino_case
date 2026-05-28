@@ -2,6 +2,8 @@
 
 Behavioral analytics project exploring retention, monetization, social engagement, and churn prediction in a mobile social casino game.
 
+---
+
 ## Business Context
 
 Social casino games rely heavily on player retention and monetization.
@@ -18,7 +20,7 @@ This project simulates a real-world product analytics workflow using a synthetic
 - Where does churn happen most frequently?
 - Can churn be predicted from player behavior?
 
-  ## Dataset Overview
+## Dataset Overview
 
 The project combines multiple behavioral tables:
 
@@ -36,7 +38,42 @@ The project combines multiple behavioral tables:
 - ~11,000 purchases
 - ~41,000 social interactions
 
-## Repository Structure
+## Analytical Workflow
+
+This project includes:
+
+- exploratory data analysis (EDA)
+- segmentation analysis
+- cohort retention analysis
+- monetization analysis
+- social engagement analysis
+- statistical testing
+- churn prediction modeling
+
+---
+
+## Key Insights
+
+- Whale payer users generate disproportionate revenue despite representing a small share of the player base.
+- The largest retention drop occurs between D1 and D7.
+- Socially active players demonstrate significantly longer lifetime.
+- Early-session activity patterns are strong churn indicators.
+- Platform differences had limited impact on payer conversion.
+
+## Visualizations
+
+### Retention Cohort Analysis
+[image]
+
+### Revenue by Player Segment
+[image]
+
+### Churn Prediction Feature Importance
+[image]
+
+---
+
+## Project Structure
 ```text
 social-casino-analytics/
 ├── README.md
@@ -59,6 +96,7 @@ social-casino-analytics/
 │   └── aggregation_3.sql
 └── requirements.txt
 ```
+
 ## Project Workflow
 
 Fabricate.ai CSVs
@@ -68,35 +106,3 @@ BigQuery SQL aggregations
 Python analysis & ML
         ↓
 Business insights & recommendations
-
-## Analytical Workflow
-
-The project includes:
-
-- exploratory data analysis (EDA)
-- segmentation analysis
-- cohort retention analysis
-- monetization analysis
-- social engagement analysis
-- statistical testing
-- churn prediction modeling
-
-
-  ## Key Insights
-
-- Whale payer users generate disproportionate revenue despite representing a small share of the player base.
-- The largest retention drop occurs between D1 and D7.
-- Socially active players demonstrate significantly longer lifetime.
-- Early-session activity patterns are strong churn indicators.
-- Platform differences had limited impact on payer conversion.
-
-  ## Visualizations
-
-### Retention Cohort Analysis
-[image]
-
-### Revenue by Player Segment
-[image]
-
-### Churn Prediction Feature Importance
-[image]
