@@ -1,37 +1,46 @@
-# Who Plays, Who Stays, Who Pays (Python, SQL (Google BigQuery), Statistics, Machine Learning)
+# Who Plays, Who Stays, Who Pays
+Behavioral analytics for retention, monetization, and churn prediction in a social casino game.
 
-Behavioral analytics project exploring retention, monetization, social engagement, and churn prediction in a mobile social casino game.
+This project analyzes player behavior in a synthetic social casino dataset to understand retention, churn, monetization, and the impact of social activity on lifetime.
 
 ---
 
+## Tech Stack
+
+- SQL (Google BigQuery)
+- Python
+- Pandas
+- NumPy
+- Plotly
+- Matplotlib
+- Seaborn
+- Scikit-Learn
+
 ## Business Context
 
-Social casino games rely heavily on player retention and monetization.
-Understanding which users stay engaged, convert into payers, and eventually churn is critical for product growth.
-
-This project simulates a real-world product analytics workflow using a synthetic behavioral dataset generated with Fabricate.tonic.ai.
+Social casino games depend on keeping players active and turning engaged users into payers.
+This project looks at which players stay longer, which ones churn faster, and what behaviors are linked to better retention.
 
 ## Key Business Questions
 
-- What player segments exist and how do they differ?
-- Which users generate the highest revenue?
-- What affects player lifetime and retention?
-- How do social interactions influence engagement?
-- Where does churn happen most frequently?
-- Can churn be predicted from player behavior?
+- How is the player base distributed across segments?
+- Which segments stay active the longest?
+- Where does churn happen most often?
+- How do social interactions affect lifetime?
+- Which acquisition channels bring better players?
+- Can churn be predicted from behavior?
 
 ## Dataset Overview
 
-The project combines multiple behavioral tables:
+The project uses several behavioral tables:
 
 | Table | Description |
 |---|---|
-| players | player profile and archetype |
+| players | player profile and segment |
 | sessions | gameplay sessions |
 | purchases | in-game transactions |
 | social_interactions | player-to-player interactions |
-| player_daily_activity | daily aggregated engagement |
-| session_events | gameplay event logs |
+| player_daily_activity | daily aggregated activity |
 
 - ~3,000 players
 - ~80,000 sessions
@@ -40,69 +49,73 @@ The project combines multiple behavioral tables:
 
 ## Analytical Workflow
 
-This project includes:
-
-- exploratory data analysis (EDA)
-- segmentation analysis
-- cohort retention analysis
-- monetization analysis
-- social engagement analysis
-- statistical testing
-- churn prediction modeling
+- cleaned and validated the data
+- built segment-level metrics in SQL
+- analyzed retention by cohort
+- compared lifetime across channels and segments
+- tested the link between social activity and lifetime
+- trained churn prediction models
 
 ---
 
 ## Key Insights
 
-- Whale payer users generate disproportionate revenue despite representing a small share of the player base.
-- The largest retention drop occurs between D1 and D7.
-- Socially active players demonstrate significantly longer lifetime.
-- Early-session activity patterns are strong churn indicators.
-- Platform differences had limited impact on payer conversion.
+- Casual players make up the largest share of the audience.
+- Whale and engaged players stay active the longest and churn the least.
+- Retention drops from D1 to D30 across all cohorts.
+- Socially active players have much longer lifetimes than non-social players.
+- Session activity and social interactions are the strongest churn predictors.
 
 ## Visualizations
 
-### Retention Cohort Analysis
-[image]
+### Player Distribution by Segment
+![Player Distribution](images/player_distribution.png)
 
-### Revenue by Player Segment
-[image]
+### Cohort Retention Heatmap
+![Cohort Retention](images/cohort_heatmap.png)
 
 ### Churn Prediction Feature Importance
-[image]
+![Feature Importance](images/churn_feature_importance.png)
 
+## Project Notes
+
+- I found and fixed a fan-out join issue that was inflating business metrics.
+- Recent cohorts should be interpreted carefully because the 30-day retention window is incomplete.
+- The churn model was tested without leakage-prone features such as lifetime and recency.
 ---
 
 ## Project Structure
 ```text
-social-casino-analytics/
+social-casino-case/
+│
 ├── README.md
+│
 ├── notebook/
-│   └── Social_Casino_Analytics.ipynb
-├── data/
-│   ├── players.csv
-│   ├── sessions.csv
-│   ├── purchases.csv
-│   ├── social_interactions.csv
-│   ├── player_daily_activity.csv
-│   └── session_events.csv
-├── images/
-│   ├── cohort_heatmap.png
-│   ├── revenue_by_segment.png
-│   └── churn_feature_importance.png
+│   └── Social_Casino_Case.ipynb
+│
 ├── sql/
-│   ├── aggregation_1.sql
-│   ├── aggregation_2.sql
-│   └── aggregation_3.sql
-└── requirements.txt
+│   ├── player_segments.sql
+│   ├── segment_summary.sql
+│   └── cohort_retention.sql
+│
+├── data/
+│   ├── raw/
+│   │   ├── players.csv
+│   │   ├── sessions.csv
+│   │   ├── purchases.csv
+│   │   ├── social_interactions.csv
+│   │   └── player_daily_activity.csv
+│   │
+│   └── processed/
+│       ├── player_segments.csv
+│       ├── segment_summary.csv
+│       └── cohort_retention.csv
+│
+└── images/
+    ├── player_distribution.png
+    ├── churn_rate.png
+    ├── cohort_heatmap.png
+    ├── social_activity_vs_lifetime.png
+    ├── roc_curve.png
+    └── feature_importance.png
 ```
-
-## Project Workflow
-
-Fabricate.ai CSVs
-        ↓
-BigQuery SQL aggregations
-        ↓
-Python analysis & ML
-        ↓
-Business insights & recommendations
