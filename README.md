@@ -1,9 +1,12 @@
 # Who Plays, Who Stays, Who Pays
 Behavioral analytics for retention, monetization, and churn prediction in a social casino game.
 
-This project analyzes player behavior in a synthetic social casino dataset to understand retention, churn, monetization, and the impact of social activity on lifetime.
-
 ---
+Notebook:
+[Social_Casino_Case.ipynb](notebook/Social_Casino_Case.ipynb)
+---
+
+This project analyzes player behavior in a synthetic social casino dataset to understand retention, churn, monetization, and the impact of social activity on lifetime.
 
 ## Tech Stack
 
