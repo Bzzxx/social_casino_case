@@ -1,0 +1,7 @@
+archetype,total_players,share_pct,avg_lifetime_days,min_lifetime_days,max_lifetime_days,churn_rate_pct,conversion_rate_pct,total_revenue_usd,avg_revenue_per_player,avg_revenue_per_payer,revenue_share_pct,avg_sessions,avg_session_duration_min,avg_sessions_per_week,avg_social_interactions,has_social_pct
+whale_payer,150,5,237.8,166,356,46.7,100,575443934.41,3836292.9,3836292.9,99.6,171.3,25,5,37.1,100
+minnow_payer,150,5,144.2,61,249,73.3,100,1195723.29,7971.49,7971.49,0.2,21.2,9.6,1,9,100
+engaged,600,20,214.4,121,360,59.2,2.7,902997.04,1505,56437.31,0.2,69.1,17.5,2.3,42.2,100
+burst,300,10,13.6,2,21,94,3.7,12982.01,43.27,1180.18,0,9.5,12.5,4.9,10.4,99.7
+casual,1500,50,47.1,0,90,86.5,0.5,573.03,0.38,81.86,0,4.4,6.4,0.7,3.6,87.1
+early_churn,300,10,1.9,0,3,99.7,0,0,0,,0,0.8,3,2.8,0.5,46.7
