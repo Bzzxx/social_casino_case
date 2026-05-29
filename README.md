@@ -74,7 +74,8 @@ The project uses several behavioral tables:
 ### Cohort Retention Heatmap
 ![Cohort Retention](images/cohort_heatmap.png)
 
-
+### Churn Prediction Feature Importance
+![Feature Importance](images/feature_importance_v2.png)
 
 ## Project Notes
 
