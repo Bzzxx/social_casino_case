@@ -68,13 +68,13 @@ The project uses several behavioral tables:
 
 ## Visualizations
 
-### Player Distribution by Segment
+
 ![Player Distribution](images/player_distribution.png)
 
-### Cohort Retention Heatmap
+
 ![Cohort Retention](images/cohort_heatmap.png)
 
-### Churn Prediction Feature Importance
+
 ![Feature Importance](images/feature_importance_v2.png)
 
 ## Project Notes
