@@ -82,9 +82,9 @@ The project uses several behavioral tables:
 
 ## Project Notes
 
-- I found and fixed a fan-out join issue that was inflating business metrics.
-- Recent cohorts should be interpreted carefully because the 30-day retention window is incomplete.
-- The churn model was tested without leakage-prone features such as lifetime and recency.
+- During validation, I identified and fixed a fan-out join issue that was inflating business metrics.
+- Recent cohorts should be interpreted carefully because the D30 observation window is incomplete.
+- Churn models were trained without leakage-prone features such as lifetime_days and recency_days.
 ---
 
 ## Project Structure
