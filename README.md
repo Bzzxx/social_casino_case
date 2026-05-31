@@ -6,23 +6,23 @@ Notebook:
 [Social_Casino_Case.ipynb](notebook/Social_Casino_Case.ipynb)
 ---
 
-This project analyzes player behavior in a synthetic social casino dataset to understand retention, churn, monetization, and the impact of social activity on lifetime.
+Behavioral analytics for retention, monetization, and churn prediction in a social casino game.
 
 ## Tech Stack
 
-- SQL (Google BigQuery)
-- Python
-- Pandas
-- NumPy
-- Plotly
-- Matplotlib
-- Seaborn
-- Scikit-Learn
+BigQuery · Python · pandas · scikit-learn · Plotly · Matplotlib · Seaborn
 
 ## Business Context
 
-Social casino games depend on keeping players active and turning engaged users into payers.
-This project looks at which players stay longer, which ones churn faster, and what behaviors are linked to better retention.
+Social casino games depend on keeping players engaged and converting active users into payers.
+
+## The goal of this analysis was to understand:
+
+- who the players are,
+- which segments create the most value,
+- what drives retention,
+- where churn happens,
+- and whether churn can be predicted from player behavior.
 
 ## Key Business Questions
 
@@ -63,11 +63,12 @@ The project uses several behavioral tables:
 
 ## Key Insights
 
-- Casual players make up the largest share of the audience.
-- Whale and engaged players stay active the longest and churn the least.
-- Retention drops from D1 to D30 across all cohorts.
-- Socially active players have much longer lifetimes than non-social players.
-- Session activity and social interactions are the strongest churn predictors.
+ Casual players account for roughly half of the player base.
+- Whale and engaged players stay active the longest and show the lowest churn rates.
+- Retention declines consistently from D1 to D30 across cohorts.
+- Socially active players demonstrate substantially longer lifetimes.
+- Session activity and social interactions are among the strongest churn predictors.
+- Random Forest outperformed Logistic Regression in churn prediction.
 
 ## Visualizations
 
@@ -80,27 +81,39 @@ The project uses several behavioral tables:
 
 ![Feature Importance](images/feature_importance_v2.png)
 
-## Project Notes
+---
 
-- During validation, I identified and fixed a fan-out join issue that was inflating business metrics.
-- Recent cohorts should be interpreted carefully because the D30 observation window is incomplete.
-- Churn models were trained without leakage-prone features such as lifetime_days and recency_days.
+## Notes From the Analysis
+
+### Fan-out Join Issue
+
+A direct join between player, session, purchase, and social tables produced inflated metrics because of row multiplication.
+
+To avoid this issue, each behavioral table was aggregated separately before joining at the player level.
+
+### Cohort Interpretation
+
+Recent cohorts (November–December 2024) should be interpreted carefully because not all players had a complete 30-day observation window.
+
+### Churn Modeling
+
+Leakage-prone variables such as `lifetime_days` and `recency_days` were excluded from the final churn model to better reflect a realistic prediction scenario.
 ---
 
 ## Project Structure
 ```text
 social-casino-case/
-│
+
 ├── README.md
-│
+
 ├── notebook/
 │   └── Social_Casino_Case.ipynb
-│
+
 ├── sql/
 │   ├── player_segments.sql
 │   ├── segment_summary.sql
 │   └── cohort_retention.sql
-│
+
 ├── data/
 │   ├── raw/
 │   │   ├── players.csv
@@ -113,12 +126,26 @@ social-casino-case/
 │       ├── player_segments.csv
 │       ├── segment_summary.csv
 │       └── cohort_retention.csv
-│
+
 └── images/
     ├── player_distribution.png
     ├── churn_rate.png
     ├── cohort_heatmap.png
     ├── social_activity_vs_lifetime.png
     ├── roc_curve.png
-    └── feature_importance.png
+    └── feature_importance_v2.png
 ```
+---
+
+## What I Learned
+
+During this project I practiced:
+
+- designing analytical datasets in BigQuery
+- cohort and retention analysis
+- behavioral segmentation
+- identifying data quality issues
+- avoiding fan-out joins
+- statistical testing
+- building and evaluating churn prediction models
+- translating analytical findings into business recommendations
