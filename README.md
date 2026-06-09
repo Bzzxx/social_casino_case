@@ -2,10 +2,7 @@
 Behavioral analytics for retention, monetization, and churn prediction in a social casino game.
 
 ---
-Behavioral analytics for retention, monetization, and churn prediction in a social casino game.
 
-
----
 Notebook can be found here:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Nxp1lvYVci_Sbrxb4lLtc4PVTh87f4nL)
 ---
