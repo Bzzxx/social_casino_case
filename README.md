@@ -5,12 +5,17 @@ Behavioral analytics for retention, monetization, and churn prediction in a soci
 Behavioral analytics for retention, monetization, and churn prediction in a social casino game.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Nxp1lvYVci_Sbrxb4lLtc4PVTh87f4nL#scrollTo=SbSuCzibFdvC)
-()
+
 ---
 
 ## Tech Stack
 
-BigQuery · Python · pandas · scikit-learn · Plotly · Matplotlib · Seaborn
+- **BigQuery**
+- **Python Зandas** 
+- **Scikit-learn** 
+- **Plotly**
+- **Matplotlib**
+- **Seaborn**
 
 ## Business Context
 
