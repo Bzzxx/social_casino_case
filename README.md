@@ -3,7 +3,7 @@ Behavioral analytics for retention, monetization, and churn prediction in a soci
 
 ---
 Notebook:
-[Social_Casino_Case.ipynb](notebook/Social_Casino_Case.ipynb)
+[Social_Casino_Case.ipynb](Social_Casino_Case.ipynb)
 ---
 
 Behavioral analytics for retention, monetization, and churn prediction in a social casino game.
