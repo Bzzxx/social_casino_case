@@ -34,11 +34,11 @@ The project uses several behavioral tables:
 
 ## Method
 
-1) Data validation and cleaning in BigQuery
-2) Segment-level metrics in SQL (RFM + behavioral segmentation)
-3) Cohort retention analysis (D1–D30)
-4) Statistical testing of segment differences before reporting any "insight"
-5) Churn prediction: Logistic Regression and Random Forest (scikit-learn)
+1) Data validation and cleaning in BigQuery.
+2) Segment-level metrics in SQL (RFM + behavioral segmentation).
+3) Cohort retention analysis (D1–D30).
+4) Statistical testing of segment differences before reporting any "insight".
+5) Churn prediction: Logistic Regression and Random Forest (scikit-learn).
 
 Churn label (is_churned) was provided with the synthetic dataset. 
 It is not a simple inactivity threshold: all retained players show recency_days = 0, 
@@ -124,8 +124,8 @@ social-casino-case/
 
 ## What I Learned
 
-- Aggregate before you join — fan-out inflates everything downstream
-- AUC = 1.0 means a broken pipeline, not a great model
-- Incomplete observation windows quietly distort cohort comparisons
-- Statistical testing before declaring segment "insights"
-- Translating analytical findings into business recommendations
+- Aggregate before you join — fan-out inflates everything downstream.
+- AUC = 1.0 means a broken pipeline, not a great model.
+- Incomplete observation windows quietly distort cohort comparisons.
+- Statistical testing before declaring segment "insights".
+- Translating analytical findings into business recommendations.
