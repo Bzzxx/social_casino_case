@@ -5,37 +5,15 @@ Behavioral analytics for retention, monetization, and churn prediction in a soci
 
 Notebook can be found here:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Nxp1lvYVci_Sbrxb4lLtc4PVTh87f4nL)
+
 ---
 
-## Tech Stack
+## Problem
 
-- **BigQuery**
-- **Python Зandas** 
-- **Scikit-learn** 
-- **Plotly**
-- **Matplotlib**
-- **Seaborn**
-
-## Business Context
-
-Social casino games depend on keeping players engaged and converting active users into payers.
-
-## The goal of this analysis was to understand:
-
-- who the players are,
-- which segments create the most value,
-- what drives retention,
-- where churn happens,
-- and whether churn can be predicted from player behavior.
-
-## Key Business Questions
-
-- How is the player base distributed across segments?
-- Which segments stay active the longest?
-- Where does churn happen most often?
-- How do social interactions affect lifetime?
-- Which acquisition channels bring better players?
-- Can churn be predicted from behavior?
+Social casino games live or die by retention and by converting active players into payers. The goal of this analysis:
+- Which player segments create the most value?
+- What drives retention, and where does churn happen?
+- Can churn be predicted from behavior alone — honestly, without leaking the answer into the features?
 
 ## Dataset Overview
 
@@ -54,25 +32,34 @@ The project uses several behavioral tables:
 - ~11,000 purchases
 - ~41,000 social interactions
 
-## Analytical Workflow
+## Method
 
-- cleaned and validated the data
-- built segment-level metrics in SQL
-- analyzed retention by cohort
-- compared lifetime across channels and segments
-- tested the link between social activity and lifetime
-- trained churn prediction models
+1) Data validation and cleaning in BigQuery
+2) Segment-level metrics in SQL (RFM + behavioral segmentation)
+3) Cohort retention analysis (D1–D30)
+4) Statistical testing of segment differences before reporting any "insight"
+5) Churn prediction: Logistic Regression and Random Forest (scikit-learn)
 
----
+Churn label (is_churned) was provided with the synthetic dataset. 
+It is not a simple inactivity threshold: all retained players show recency_days = 0, 
+While churned players range from 0 to 364 — meaning any recency_days > 0 guarantees the churn label.
 
-## Key Insights
+## What Went Wrong First
+The most useful parts of this project were the failures.
 
- Casual players account for roughly half of the player base.
-- Whale and engaged players stay active the longest and show the lowest churn rates.
+- Fan-out join. A direct join across player, session, purchase, and social tables multiplied rows and silently inflated revenue and activity metrics. Fix: aggregate each behavioral table separately, then join at the player level.
+- A "perfect" churn model. The first Random Forest returned AUC = 1.0. That's not a result — it's a red flag. The features included lifetime_days and recency_days, which encode the churn label itself (target leakage): in this dataset, any recency_days > 0 guarantees is_churned = 1, so the model was simply reading the answer. After removing them and rebuilding the feature set, the models landed on honest numbers.
+- Incomplete cohorts. The most recent cohorts (Nov–Dec 2024) lacked a full 30-day observation window; their retention figures were flagged and excluded from cross-cohort conclusions.
+
+
+## Results
+
+
+- Random Forest: AUC = 0.74 · Logistic Regression: AUC = 0.68 (after leakage fix; both down from a fake 1.0).
+- Top churn predictors: avg_session_min, total_sessions, social_interactions — behavior beats monetization (revenue_usd, purchases near the bottom).
+- Casual players ≈ half of the player base; whales and engaged players show the longest lifetimes and lowest churn.
+- Socially active players demonstrate substantially longer lifetimes than non-social players.
 - Retention declines consistently from D1 to D30 across cohorts.
-- Socially active players demonstrate substantially longer lifetimes.
-- Session activity and social interactions are among the strongest churn predictors.
-- Random Forest outperformed Logistic Regression in churn prediction.
 
 ## Visualizations
 
@@ -85,23 +72,6 @@ The project uses several behavioral tables:
 
 ![Feature Importance](images/feature_importance_v2.png)
 
----
-
-## Notes From the Analysis
-
-### Fan-out Join Issue
-
-A direct join between player, session, purchase, and social tables produced inflated metrics because of row multiplication.
-
-To avoid this issue, each behavioral table was aggregated separately before joining at the player level.
-
-### Cohort Interpretation
-
-Recent cohorts (November–December 2024) should be interpreted carefully because not all players had a complete 30-day observation window.
-
-### Churn Modeling
-
-Leakage-prone variables such as `lifetime_days` and `recency_days` were excluded from the final churn model to better reflect a realistic prediction scenario.
 ---
 
 ## Project Structure
@@ -141,15 +111,21 @@ social-casino-case/
 ```
 ---
 
+## Tech Stack
+
+- **BigQuery**
+- **Python Зandas** 
+- **Scikit-learn** 
+- **Plotly**
+- **Matplotlib**
+- **Seaborn**
+  
+---
+
 ## What I Learned
 
-During this project I practiced:
-
-- designing analytical datasets in BigQuery
-- cohort and retention analysis
-- behavioral segmentation
-- identifying data quality issues
-- avoiding fan-out joins
-- statistical testing
-- building and evaluating churn prediction models
-- translating analytical findings into business recommendations
+- Aggregate before you join — fan-out inflates everything downstream
+- AUC = 1.0 means a broken pipeline, not a great model
+- Incomplete observation windows quietly distort cohort comparisons
+- Statistical testing before declaring segment "insights"
+- Translating analytical findings into business recommendations
